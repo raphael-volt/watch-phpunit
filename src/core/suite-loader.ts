@@ -32,7 +32,6 @@ export class SuiteLoader {
         )
     }
     setDefault(value: boolean, suite: ISuite): Observable<boolean> | null {
-        console.log("setDefault", value, suite?.path, this.defaultSuite?.path)
         let current = this.config.defaultSuite
         if (!value) {
             if (!current)
@@ -74,7 +73,7 @@ export class SuiteLoader {
                     }
                     this.config = config
                     let prevCwd = null
-                    if(config.cwd){
+                    if (config.cwd) {
                         prevCwd = process.cwd()
                         process.chdir(config.cwd)
                     }
@@ -88,7 +87,7 @@ export class SuiteLoader {
                                 _observer.error(error)
                             },
                             () => {
-                                if(prevCwd)
+                                if (prevCwd)
                                     process.chdir(prevCwd)
                                 _observer.complete()
                             }
@@ -113,7 +112,7 @@ class SuiteFinder {
     private _dirs: string[]
     private _files: string[]
 
-    private config:IConfig
+    private config: IConfig
     private _observer: Observer<ISuite>
     /**
      * 
@@ -160,8 +159,7 @@ class SuiteFinder {
         const file = this._files.shift()
 
         fs.readFile(file, (error: Error, data: Buffer) => {
-            if (error){
-                console.log("nextFile error".red.bold)
+            if (error) {
                 return this._observer.error(error)
             }
             this.checkXML(data, file)
@@ -171,8 +169,8 @@ class SuiteFinder {
     private checkXML(data: Buffer, file: string) {
         parseString(data.toString(), (err, json) => {
             if (err)
-            return console.error(err)
-            
+                return console.error(err)
+
             const phpunit = (json && json.phpunit) ? json.phpunit : null
             if (phpunit && phpunit.$ && phpunit.$["xmlns:xsi"]) {
                 const attr = phpunit.$
@@ -182,7 +180,6 @@ class SuiteFinder {
                     path: f,
                     names: []
                 }
-                console.log('checkXML',f, file)
                 const suites = phpunit.testsuites
                 for (let item of suites) {
                     for (let ts of item.testsuite)
@@ -190,7 +187,6 @@ class SuiteFinder {
                 }
                 this._observer.next(suite)
             }
-
             this.nextFile()
         })
     }

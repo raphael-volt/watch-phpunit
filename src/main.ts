@@ -8,6 +8,7 @@ import { exec } from "child_process";
 import { watch, FSWatcher } from "chokidar";
 import { join } from "path";
 import * as colors from "colors";
+import { EOL } from "os";
 colors.enable()
 
 type SubKeys = "config" | "suite" | "action"
@@ -130,7 +131,6 @@ class PhpUnitWarcher {
     }
 
     private chokidar() {
-        console.log(process.cwd())
         if (this.watcher)
             return this.phpunit()
         let dirs = this.loader.config.watch
@@ -139,7 +139,6 @@ class PhpUnitWarcher {
         let cwd: string = config.cwd ? config.cwd : null
         if (cwd)
             dirs = dirs.map(dir => join(cwd, dir))
-            console.log(dirs)
         const watcher: FSWatcher = watch(dirs)
         this.watcher = watcher
         watcher.on('error', error => {
@@ -169,12 +168,11 @@ class PhpUnitWarcher {
     private fsChange = (error, stdout, stderr) => {
         if (this.state == "action") {
             process.stdin.emit('keypress', Action.run)
-            process.stdin.emit('keypress', "\n")
+            process.stdin.emit('keypress', EOL)
         }
     }
     private setDefault(action: Action) {
         const isDefault = action == Action.setdefault
-
         const save = this.loader.setDefault(isDefault, this.suite)
         if (save) {
             this.subs.config = save.subscribe(
