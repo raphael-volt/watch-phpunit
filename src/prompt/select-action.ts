@@ -4,11 +4,13 @@ import { ISuite } from "src/core/isuite";
 
 export class SelectAction extends Select<Action> {
 
-    constructor(private defaultSuite: ISuite=null){
+    constructor(
+        private currentSuite: ISuite,
+        private defaultSuite: ISuite = null) {
         super()
     }
     protected createQuetions() {
-        const defaultSuite = this.defaultSuite
+        const setFlag = this.currentSuite != this.defaultSuite
         const choices = [
             {
                 name: "Restart the suite",
@@ -19,8 +21,8 @@ export class SelectAction extends Select<Action> {
                 value: Action.select
             },
             {
-                name: defaultSuite ? "Unset default":"Set as default",
-                value: defaultSuite ? Action.unsetdefault:Action.setdefault
+                name: setFlag ? "Set as default":"Unset default",
+                value: setFlag ? Action.setdefault : Action.unsetdefault
             },
             {
                 name: "Abord",
@@ -32,7 +34,7 @@ export class SelectAction extends Select<Action> {
                 type: 'list',
                 name: 'action',
                 message: 'What do you want to do?',
-                choices: choices 
+                choices: choices
             }
         ]
     }

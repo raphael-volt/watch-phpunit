@@ -101,7 +101,7 @@ class PhpUnitWarcher {
     }
     private addActionSelector() {
         this.state = "action"
-        this.selectAction = new SelectAction(this.loader.defaultSuite)
+        this.selectAction = new SelectAction(this.suite, this.loader.defaultSuite)
         this.subs.action = this.selectAction.prompt().subscribe(action => {
             this.unsubscribe("action")
             switch (action) {

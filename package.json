@@ -1,6 +1,6 @@
 {
   "name": "watch-phpunit",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "bin/watch-phpunit",
   "bin": {
@@ -20,6 +20,7 @@
     "url": "https://github.com/raphael-volt/watch-phpunit"
   },
   "scripts": {
+    "start":"npm run build && bin/watch-phpunit",
     "clean": "rimraf dist",
     "build": "npm run clean && tsc --pretty",
     "test": "echo \"Error: no test specified\" && exit 1"
