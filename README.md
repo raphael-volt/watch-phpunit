@@ -1,4 +1,4 @@
-# phpunit-watcher
+# watch-phpunit
 
 A command line tool for `PHPUnit`.        
 - test suite selection
@@ -8,7 +8,7 @@ A command line tool for `PHPUnit`.
 
 - Localy
     ```bash
-    npm i -D phpunit-watcher
+    npm i -D watch-phpunit
     ```
     Create a script entry in your `package.json`:
     ```json
@@ -24,11 +24,11 @@ A command line tool for `PHPUnit`.
     ```
 - Globaly
     ```bash
-    npm i -g phpunit-watcher
+    npm i -g watch-phpunit
     ```
     Keep in mind that a `phpunit.config.json` must exists in current directory.
     ```bash
-    phpunit-watcher
+    watch-phpunit
     ```
 # Configuration
 
