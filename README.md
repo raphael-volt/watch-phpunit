@@ -4,7 +4,32 @@ A command line tool for `PHPUnit`.
 - test suite selection
 - live reload on file system changes
 
+# Installation
 
+- Localy
+    ```bash
+    npm i -D phpunit-watcher
+    ```
+    Create a script entry in your `package.json`:
+    ```json
+    {
+        "scripts": {
+            "wpu":"watch-phpunit"
+        }
+    }
+    ```
+    Then, run it:
+    ```
+    npm run wpu
+    ```
+- Globaly
+    ```bash
+    npm i -g phpunit-watcher
+    ```
+    Keep in mind that a `phpunit.config.json` must exists in current directory.
+    ```bash
+    phpunit-watcher
+    ```
 # Configuration
 
 Create the `phpunit.config.json` at the root of your project.
