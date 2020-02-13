@@ -27,10 +27,13 @@
 			"glob",
 			"colors",
 			"xml2js",
-			"chokidar"
+			"chokidar",
+			"mocha",
+			"chai"
 		]
 	},
 	"include": [
 		"src/**/*"
-	]
+	],
+	"exclude": ["node_modules"]
 }

@@ -1,15 +1,15 @@
-import { Select } from "./iselect";
+import { FormBase } from "./form-base";
 import { Action } from "../core/action";
-import { ISuite } from "src/core/isuite";
+import { ISuiteValue } from "../core/isuite";
 
-export class SelectAction extends Select<Action> {
+export class ActionForm extends FormBase<Action> {
 
     constructor(
-        private currentSuite: ISuite,
-        private defaultSuite: ISuite = null) {
+        private currentSuite: ISuiteValue,
+        private defaultSuite: ISuiteValue = null) {
         super()
     }
-    protected createQuetions() {
+    createQuetions() {
         const setFlag = this.currentSuite != this.defaultSuite
         const choices = [
             {
@@ -38,7 +38,7 @@ export class SelectAction extends Select<Action> {
             }
         ]
     }
-    protected getValue(data) {
+    getValue(data) {
         return data.action
     }
 }

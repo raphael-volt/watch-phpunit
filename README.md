@@ -4,69 +4,108 @@ A command line tool for `PHPUnit`.
 - test suite selection
 - live reload on file system changes
 
+# Usage
+
+```txt
+Usage: watch-phpunit [options]
+Options:    
+    -h, --help       Show help.
+    -v, --version    Show version number.
+    -c --config      Create or override the configuration file.
+```
+`watch-phpunit` will prompt you to pick a suite from the search result list:
+```bash
+watch-phpunit
+```
+Use keybord arrows to hilight your choice, then press `<return>`
+
+After the tests execution, you can :
+- restart the suite
+- select another suite
+- `add|remove` a default suite
+    - when a default suite is defined, you won't be asked to select a suite at startup 
+- abord
+
+The test suite will restart automaticaly when watched files are saved.
+
 # Installation
 
 - Localy
     ```bash
     npm i -D watch-phpunit
     ```
-    Create a script entry in your `package.json`:
-    ```json
-    {
-        "scripts": {
-            "wpu":"watch-phpunit"
-        }
-    }
-    ```
-    Then, run it:
-    ```
-    npm run wpu
-    ```
 - Globaly
     ```bash
     npm i -g watch-phpunit
     ```
-    Keep in mind that a `phpunit.config.json` must exists in current directory.
-    ```bash
-    watch-phpunit
-    ```
+
 # Configuration
 
-Create the `phpunit.config.json` at the root of your project.
+### `watch-phpunit.config.json` example
 
 ```json
 {
-    "filter": "/**/*.xml",
-    "cwd":"www",
-    "dirs": [
-        "specs/config"
+    "suites": [
+        {
+            "pattern": "**/*.xml",
+            "dirs": [
+                "specs/config"
+            ]
+        }
     ],
-    "cmd": "docker exec mycontainer phpunit",
     "watch": [
-        "**/*.php",
-        "specs/**/.xml"
-    ]
+        {
+            "pattern": "**/*.php",
+            "dirs": [
+                "."
+            ]
+        },
+        {
+            "pattern": "**/*.xml",
+            "dirs": [
+                "specs/config"
+            ]
+        }
+    ],
+    "cmd": "docker exec my-container phpunit",
+    "pathMapping": {
+        "source": "www",
+        "target": "/var/www/html"
+    }
 }
-``` 
+```
 
-Adapt it according to your project structure.
+### Project structure:
 
-## **filter**
+```txt
+├── docker-compose.yml
+├── package.json
+├── README.md
+├── watch-phpunit.config.json
+├── www
+│   ├── specs
+│   │   └── config
+│   │       ├── autoload-back.php
+│   │       ├── autoload-front.php
+│   │       ├── back.xml
+│   │       └── front.xml
+...
+```
 
-A specific pattern to limit search result.
+# npm scripts
 
-## **cwd**
-
-The relative path to the server document root.
-
-## **dirs**
-
-The Directories where the suites are stored (recursive search).  
-
-## **cmd**
-
-The command to use to run `PHPUnit`. 
-
-## **watch**
-
-The directories to watch on file system changes to live reload the current suite.
+- Add script entries to `package.json`:
+    ```json
+    {
+        "scripts": {
+            "wpu":"watch-phpunit",
+            "wpu:config":"watch-phpunit -c"
+        }
+    }
+    ```
+- Run the script:
+    ```bash
+    npm run wpu
+    npm run wpu:config
+    ```
+- Answer the questions

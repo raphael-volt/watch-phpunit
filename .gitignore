@@ -1,5 +1,7 @@
 www/
 node_modules/
 dist/
-phpunit.config.json
-.vscode/
+watch-phpunit.config.json
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
