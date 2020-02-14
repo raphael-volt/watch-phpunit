@@ -1,6 +1,6 @@
 export enum Action {
     "run",
-    "abord",
+    "abort",
     "select",
     "setdefault",
     "unsetdefault"

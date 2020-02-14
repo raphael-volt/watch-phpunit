@@ -25,8 +25,8 @@ export class ActionForm extends FormBase<Action> {
                 value: setFlag ? Action.setdefault : Action.unsetdefault
             },
             {
-                name: "Abord",
-                value: Action.abord
+                name: "Abort",
+                value: Action.abort
             }
         ]
         return [

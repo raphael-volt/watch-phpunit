@@ -205,7 +205,7 @@ class PhpUnitWarcher {
         this.subs.action = this.selectAction.prompt().subscribe(action => {
             this.unsubscribe("action")
             switch (action) {
-                case Action.abord:
+                case Action.abort:
                     this.watcher.close()
                     process.exit(0)
 
