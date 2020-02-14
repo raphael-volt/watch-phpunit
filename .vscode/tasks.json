@@ -9,14 +9,7 @@
             "group": "build",
             "label": "compile",
             "problemMatcher": []
-        },
-        {
-            "type": "npm",
-            "script": "start",
-            "group": "build",
-            "label": "npmstart",
-            "problemMatcher": []
-        },
+        }
         
     ]
 }

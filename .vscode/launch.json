@@ -6,31 +6,10 @@
     "configurations": [
         {
             "type": "node",
-            "request": "attach",
-            "name": "Attach NPM START",
-            "port": 9229,
-            "skipFiles": [
-                "<node_internals>/**"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch MOCHA-RESTART",
-            "program": "${workspaceFolder}/node_modules/.bin/_mocha",
-            "restart": true,
-            "skipFiles": [
-                "<node_internals>/**"
-            ]
-        },
-        {
-            "type": "node",
             "request": "launch",
             "name": "DEBUG watch-phpunit",
             "program": "${workspaceFolder}/bin/watch-phpunit",
-            "args": [
-                "-v"
-            ],
+            "args": [],
             "preLaunchTask": "compile",
             "protocol": "inspector",
             "restart": false,
@@ -39,17 +18,18 @@
                 "<node_internals>/**"
             ]
         },
-        
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch via NPM",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "run-script",
-                "start:config"
+            "name": "DEBUG watch-phpunit:config",
+            "program": "${workspaceFolder}/bin/watch-phpunit",
+            "args": [
+                "-c"
             ],
-            "port": 9229,
+            "preLaunchTask": "compile",
+            "protocol": "inspector",
+            "restart": false,
+            "console": "integratedTerminal",
             "skipFiles": [
                 "<node_internals>/**"
             ]
@@ -62,11 +42,11 @@
             "args": [
                 "${workspaceFolder}"
             ],
+            "restart": false,
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": [
                 "<node_internals>/**"
             ]
         },
-        
     ]
 }

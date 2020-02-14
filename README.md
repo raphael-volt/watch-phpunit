@@ -17,16 +17,16 @@ Options:
 ```bash
 watch-phpunit
 ```
-Use keybord arrows to hilight your choice, then press `<return>`
+Use keybord arrows to highlight your choice, then press `<return>`
 
 After the tests execution, you can :
 - restart the suite
 - select another suite
 - `add|remove` a default suite
     - when a default suite is defined, you won't be asked to select a suite at startup 
-- abord
+- abort
 
-The test suite will restart automaticaly when watched files are saved.
+The test suite will restart automatically when watched files are saved.
 
 # Installation
 
