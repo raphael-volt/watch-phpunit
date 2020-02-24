@@ -1,0 +1,115 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "HTTPProtocol": {
+            "enum": [
+                "http",
+                "https"
+            ],
+            "type": "string"
+        },
+        "ISuite": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PHPUnitConfig": {
+            "properties": {
+                "cmd": {
+                    "properties": {
+                        "args": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "program": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "pathMapping": {
+                    "properties": {
+                        "source": {
+                            "type": "string"
+                        },
+                        "target": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "suites": {
+                    "properties": {
+                        "default": {
+                            "$ref": "#/definitions/ISuite"
+                        },
+                        "dirs": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "watch": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "ServerConfig": {
+            "properties": {
+                "browser": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "number"
+                },
+                "protocol": {
+                    "$ref": "#/definitions/HTTPProtocol"
+                },
+                "routes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "watch": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "phpunit": {
+            "$ref": "#/definitions/PHPUnitConfig"
+        },
+        "server": {
+            "$ref": "#/definitions/ServerConfig"
+        }
+    },
+    "type": "object"
+}
+
